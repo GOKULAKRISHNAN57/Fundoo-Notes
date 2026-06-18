@@ -20,26 +20,21 @@ public class UserController {
         this.userService = userService;
     }
 
-    // POST /api/users/register
+
     @PostMapping("/register")
     public ResponseEntity<UserResponseDto> register(
             @Valid @RequestBody UserRegisterRequestDto requestDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.register(requestDto));
     }
 
-    // POST /api/users/login
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDto> login(
             @Valid @RequestBody LoginRequestDto requestDto) {
         return ResponseEntity.ok(userService.login(requestDto));
     }
 
-    // GET /api/users/profile (requires token)
     @GetMapping("/profile")
-    public ResponseEntity<UserResponseDto> getProfile(
-            @RequestHeader("Authorization") String token) {
-        // Token parsing is handled in service layer via TokenUtil
-        // For now returning a simple message — wire properly in Part 2 with Spring Security
+    public ResponseEntity<UserResponseDto> getProfile(@RequestHeader("Authorization") String token) {
         return ResponseEntity.ok().build();
     }
 }
